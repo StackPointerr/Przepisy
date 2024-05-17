@@ -1,0 +1,32 @@
+<div class="container mt-5">
+    <div class="row">
+        <app-menu></app-menu>
+    </div>
+    <div class="col-md-9">
+        <h2>Szczegóły przepisu</h2>
+        <div class="row mt-4">
+            <div *ngIf="recipe" class="col-md-8">
+                <img src="{{ environment.apiUrl + '/' + recipe.image_url }}" class="recipe-img mb-3" alt="Zdjęcie przepisu" />
+                <h3>{{ recipe.name }}</h3>
+
+                <h5>Opis przepisu</h5>
+                <p style="white-space: pre-line">{{ recipe.description }}</p>
+
+                <h5>Opis przygotowania</h5>
+                <p style="white-space: pre-line">{{ recipe.preparation_description }}</p>
+
+                <hr />
+
+                <p>
+                    Autor: <strong>{{ recipe.author_username }}</strong>
+                </p>
+                <p>
+                    Kategoria: <strong>{{ recipe.category }}</strong>
+                </p>
+                <p>
+                    Data utworzenia: <strong>{{ recipe.creation_date }}</strong>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

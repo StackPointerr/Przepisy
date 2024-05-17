@@ -1,0 +1,46 @@
+<div class="container mt-5">
+    <div class="row">
+        <app-menu></app-menu>
+
+        <div class="col-md-9">
+            <h2 class="mb-4">Dodaj nowy przepis</h2>
+            <form>
+                <div class="mb-3">
+                    <label for="recipeName" class="form-label">Nazwa przepisu:</label>
+                    <input type="text" class="form-control" name="recipeName" placeholder="Wpisz nazwę przepisu..." [(ngModel)]="name" />
+                    <div class="mt-1 text-danger">{{ response?.errors?.title }}</div>
+                </div>
+                <div class="mb-3">
+                    <label for="shortDescription" class="form-label">Krótki opis:</label>
+                    <textarea class="form-control" name="shortDescription" rows="3" placeholder="Dodaj krótki opis..." [(ngModel)]="description"></textarea>
+                    <div class="mt-1 text-danger">{{ response?.errors?.description }}</div>
+                </div>
+                <div class="mb-3">
+                    <label for="category" class="form-label">Kategoria:</label>
+                    <select class="form-select" name="category" [(ngModel)]="category">
+                        <option value="" selected>Wybierz kategorię...</option>
+                        <option *ngFor="let category of categories" value="{{ category.id }}">{{ category.name }}</option>
+                    </select>
+                    <div class="mt-1 text-danger">{{ response?.errors?.category }}</div>
+                </div>
+                <div class="mb-3">
+                    <label for="recipeImage" class="form-label">Zdjęcie potrawy:</label>
+                    <input #imageInput class="form-control" type="file" name="recipeImage" [(ngModel)]="image" />
+                    <div class="mt-1 text-danger">{{ response?.errors?.photos }}</div>
+                </div>
+                <div class="mb-3">
+                    <label for="preparationDescription" class="form-label">Opis przygotowania:</label>
+                    <textarea
+                        class="form-control"
+                        name="preparationDescription"
+                        rows="5"
+                        placeholder="Dodaj opis przygotowania dania..."
+                        [(ngModel)]="preparation_description"
+                    ></textarea>
+                    <div class="mt-1 text-danger">{{ response?.errors?.preparation_description }}</div>
+                </div>
+                <button type="submit" class="btn btn-primary" (click)="addRecipe(imageInput)">Dodaj przepis</button>
+            </form>
+        </div>
+    </div>
+</div>

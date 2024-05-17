@@ -1,0 +1,24 @@
+<div class="container mt-5">
+    <div class="row">
+        <app-menu></app-menu>
+        <div class="col-xl-9">
+            <h2 class="mb-4">Moja ksiązka kucharska</h2>
+
+            <div class="row row-cols-1 row-cols-md-2 g-4">
+                <div *ngFor="let recipe of recipes" class="col">
+                    <div class="card">
+                        <img *ngIf="recipe.image_url" src="{{ environment.apiUrl + '/' + recipe.image_url }}" class="card-img-top" alt="Zdjęcie dania" />
+                        <div class="card-body">
+                            <h5 class="card-title">{{ recipe.name }}</h5>
+                            <p class="card-text">{{ recipe.description }}</p>
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                                <button [routerLink]="['/', 'recipe', recipe.id]" class="btn btn-primary">Szczegóły</button>
+                                <button class="btn btn-danger" (click)="removeFromBook(recipe.id)">Usuń z książki kucharskiej</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+<div class="container mt-5">
+    <div class="row">
+        <app-menu></app-menu>
+        <div class="col-xl-9">
+            <h2 class="mb-4">Przepisy kucharskie</h2>
+            <form class="mb-4">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" name="name" placeholder="Szukaj przepisu..." [(ngModel)]="name" />
+                    <select class="form-select w-auto flex-grow-0" name="category" [(ngModel)]="category">
+                        <option selected value="">Wszystko</option>
+                        <option *ngFor="let category of categories" value="{{ category.id }}">{{ category.name }}</option>
+                    </select>
+                    <button type="submit" class="btn btn-primary" (click)="searchClick()">Szukaj</button>
+                </div>
+            </form>
+
+            <div class="row row-cols-1 row-cols-md-2 g-4">
+                <div *ngFor="let recipe of recipes" class="col">
+                    <div class="card">
+                        <img *ngIf="recipe.image_url" src="{{ environment.apiUrl + '/' + recipe.image_url }}" class="card-img-top" alt="Zdjęcie dania" />
+                        <div class="card-body">
+                            <h5 class="card-title">{{ recipe.name }}</h5>
+                            <p class="card-text">{{ recipe.description }}</p>
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                                <!-- <a href="#" class="btn btn-primary me-md-2 mb-2 mb-md-0">Szczegóły</a> -->
+                                <button [routerLink]="['recipe', recipe.id]" class="btn btn-primary">Szczegóły</button>
+                                <button class="btn btn-outline-secondary" (click)="addToBook(recipe.id)">Dodaj do książki</button>
+                                <button *ngIf="recipe.author_username == this.authenticationService.getUsername()" class="btn btn-danger" (click)="removeRecipe(recipe.id)">
+                                    Usuń przepis
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
